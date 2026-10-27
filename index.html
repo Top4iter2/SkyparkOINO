@@ -1,1 +1,275 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkyPark — команда, в которую хочется</title>
+  <meta name="description" content="SkyPark — надёжная и дружная команда. Узнай, почему стоит вступить именно к нам." />
+  <meta name="theme-color" content="#070b18" />
 
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Фоновое свечение -->
+  <div class="bg-aurora" aria-hidden="true">
+    <span class="blob blob-1"></span>
+    <span class="blob blob-2"></span>
+    <span class="blob blob-3"></span>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <!-- Шапка -->
+  <header class="nav" id="nav">
+    <div class="container nav__inner">
+      <a href="#top" class="logo">
+        <span class="logo__mark">SP</span>
+        <span class="logo__text">SkyPark</span>
+      </a>
+
+      <nav class="nav__links" id="navLinks">
+        <a href="#about">О команде</a>
+        <a href="#why">Почему мы</a>
+        <a href="#team">Состав</a>
+        <a href="#join">Вступить</a>
+      </nav>
+
+      <a href="#join" class="btn btn--sm nav__cta">Вступить</a>
+
+      <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero__inner">
+        <div class="hero__badge" data-reveal>
+          <span class="dot"></span> Набор в команду открыт
+        </div>
+
+        <h1 class="hero__title" data-reveal>
+          Не просто команда.<br />
+          <span class="gradient-text">SkyPark.</span>
+        </h1>
+
+        <p class="hero__sub" data-reveal>
+          Мы — люди, которые прикрывают друг друга, доводят дела до конца
+          и делают это с удовольствием. Здесь не бросают на полпути.
+        </p>
+
+        <div class="hero__actions" data-reveal>
+          <a href="#join" class="btn">Хочу к вам</a>
+          <a href="#about" class="btn btn--ghost">Познакомиться</a>
+        </div>
+
+        <div class="hero__stats" data-reveal>
+          <div class="stat">
+            <span class="stat__num" data-count="18">0</span>
+            <span class="stat__label">человек в команде</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num" data-count="3">0</span>
+            <span class="stat__label">года вместе</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num" data-count="24">0</span>
+            <span class="stat__label">часа на связи</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- О КОМАНДЕ + ФОТО -->
+    <section class="section" id="about">
+      <div class="container about">
+        <div class="about__media" data-reveal>
+          <div class="photo-frame">
+            <img src="assets/team.jpg" alt="Общая фотография команды SkyPark"
+                 width="1200" height="900" loading="lazy" />
+            <div class="photo-frame__shade"></div>
+          </div>
+          <div class="float-chip float-chip--a">🟢 Всегда онлайн</div>
+          <div class="float-chip float-chip--b">🤝 Друг за друга</div>
+        </div>
+
+        <div class="about__text" data-reveal>
+          <span class="eyebrow">О команде</span>
+          <h2 class="section-title">Мы те, кто не подведёт</h2>
+          <p>
+            SkyPark — это не случайный сбор людей на один вечер. Это команда,
+            которая знает друг друга, умеет договариваться и уважает личное
+            время каждого. У нас есть правила, но нет душноты.
+          </p>
+          <ul class="check-list">
+            <li>Помогаем новичкам влиться — без насмешек и «сам разберись»</li>
+            <li>Держим слово: договорились — сделали</li>
+            <li>Конфликты решаем внутри, а не выносим на публику</li>
+            <li>Есть актив и есть тыл — каждому найдётся место</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ПОЧЕМУ МЫ -->
+    <section class="section" id="why">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Почему мы</span>
+          <h2 class="section-title">6 причин вступить именно к нам</h2>
+          <p class="section-sub">Без обещаний «золотых гор». Только то, что реально есть.</p>
+        </div>
+
+        <div class="cards" data-stagger>
+          <article class="card" data-reveal>
+            <div class="card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
+            </div>
+            <h3>Надёжность</h3>
+            <p>Если человек сказал «буду» — он будет. На этом держится вся команда.</p>
+          </article>
+
+          <article class="card" data-reveal>
+            <div class="card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20v-1.5A3.5 3.5 0 0 0 12.5 15h-5A3.5 3.5 0 0 0 4 18.5V20"/><circle cx="10" cy="8" r="3.2"/><path d="M17.5 11a3 3 0 1 0 0-6"/><path d="M20 20v-1.2a3.5 3.5 0 0 0-2.6-3.4"/></svg>
+            </div>
+            <h3>Настоящая дружба</h3>
+            <p>Мы общаемся и вне общих дел. Кто-то всегда ответит, даже ночью.</p>
+          </article>
+
+          <article class="card" data-reveal>
+            <div class="card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15l-3-3c1.5-5 5-8 9-9-1 4-4 7.5-9 9z"/><path d="M9 12l-3 1-2 5 5-2 1-3"/><circle cx="15" cy="9" r="1.4"/></svg>
+            </div>
+            <h3>Рост</h3>
+            <p>Хочешь больше — получишь больше задач, а не больше критики.</p>
+          </article>
+
+          <article class="card" data-reveal>
+            <div class="card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>
+            </div>
+            <h3>Стабильность</h3>
+            <p>Мы не разваливаемся через месяц. Команда живёт и развивается годами.</p>
+          </article>
+
+          <article class="card" data-reveal>
+            <div class="card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 21l1.9-5.4A8 8 0 1 1 21 12z"/></svg>
+            </div>
+            <h3>Живое общение</h3>
+            <p>Голосовые, мемы, обсуждения, совместные движ — скучно не будет.</p>
+          </article>
+
+          <article class="card" data-reveal>
+            <div class="card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 4.7L18.5 9.5 13.8 11.3 12 16l-1.8-4.7L5.5 9.5 10.2 7.7 12 3z"/><path d="M19 15l.9 2.3 2.3.9-2.3.9L19 21l-.9-2.9-2.3-.9 2.3-.9L19 15z"/></svg>
+            </div>
+            <h3>Атмосфера</h3>
+            <p>Тут не орут и не самоутверждаются за счёт новичков. Тут по-человечески.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- СОСТАВ -->
+    <section class="section" id="team">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Состав</span>
+          <h2 class="section-title">Люди, которые за этим стоят</h2>
+          <p class="section-sub">Каждый — часть механизма и часть семьи.</p>
+        </div>
+
+        <div class="members" data-stagger>
+          <article class="member" data-reveal>
+            <div class="member__avatar" style="--a:#5ea9ff; --b:#a06bff">АК</div>
+            <h3>Alex</h3>
+            <span class="member__role">Основатель</span>
+            <p>Держит курс и отвечает за всё, что происходит внутри.</p>
+          </article>
+
+          <article class="member" data-reveal>
+            <div class="member__avatar" style="--a:#4ff0c4; --b:#5ea9ff">МР</div>
+            <h3>Mira</h3>
+            <span class="member__role">Заместитель</span>
+            <p>Второй человек в команде. Спокойная, чёткая, справедливая.</p>
+          </article>
+
+          <article class="member" data-reveal>
+            <div class="member__avatar" style="--a:#ff8fc7; --b:#a06bff">ДН</div>
+            <h3>Den</h3>
+            <span class="member__role">Технический лид</span>
+            <p>Решает сложные задачи и объясняет так, что понятно всем.</p>
+          </article>
+
+          <article class="member" data-reveal>
+            <div class="member__avatar" style="--a:#ffd76b; --b:#ff8fc7">ЛА</div>
+            <h3>Lera</h3>
+            <span class="member__role">Атмосфера</span>
+            <p>Следит, чтобы в команде было тепло и никто не остался в стороне.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ВСТУПИТЬ -->
+    <section class="section" id="join">
+      <div class="container">
+        <div class="join" data-reveal>
+          <div class="join__glow" aria-hidden="true"></div>
+
+          <div class="join__head">
+            <span class="eyebrow">Вступление</span>
+            <h2 class="section-title">Три шага — и ты с нами</h2>
+            <p class="section-sub">Никаких сложных отборов и недельных ожиданий.</p>
+          </div>
+
+          <div class="steps">
+            <div class="step">
+              <span class="step__num">01</span>
+              <h3>Заявка</h3>
+              <p>Пишешь нам пару слов о себе. Не надо резюме — достаточно искренности.</p>
+            </div>
+            <div class="step">
+              <span class="step__num">02</span>
+              <h3>Знакомство</h3>
+              <p>Общаемся в голосовом или в чате. Смотрим, комфортно ли обеим сторонам.</p>
+            </div>
+            <div class="step">
+              <span class="step__num">03</span>
+              <h3>Добро пожаловать</h3>
+              <p>Получаешь доступ и наставника, который поможет влиться в первые дни.</p>
+            </div>
+          </div>
+
+          <div class="join__cta">
+            <a href="#" class="btn btn--lg" data-contact>Подать заявку</a>
+            <span class="join__note">Ответим в течение 24 часов</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <a href="#top" class="logo">
+        <span class="logo__mark">SP</span>
+        <span class="logo__text">SkyPark</span>
+      </a>
+      <p class="footer__copy">© <span id="year">2025</span> SkyPark. Сделано своей командой.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+</body>
+        </html>
