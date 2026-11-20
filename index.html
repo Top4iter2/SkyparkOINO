@@ -9,11 +9,17 @@
 </head>
 <body>
 
-    <div class="background-glow"></div>
+    <!-- Атмосферный кинофон: динамический неон + виньетка + зерно кинопленки -->
+    <div class="ambient-bg" id="ambientBg">
+        <div class="glow-orb glow-1"></div>
+        <div class="glow-orb glow-2"></div>
+    </div>
+    <div class="cinema-vignette"></div>
+    <div class="film-grain"></div>
 
     <main class="container">
         <header class="header">
-            <span class="badge">EXCLUSIVE INVITE</span>
+            <span class="badge" id="statusBadge">EXCLUSIVE INVITE</span>
             <h1>У тебя одно секретное приглашение 🎬</h1>
             <p class="subtitle">Сотри защитный слой на билете ниже, чтобы узнать подробности</p>
         </header>
@@ -92,4 +98,5 @@
     <script src="script.js"></script>
 </body>
 </html>
+
 
