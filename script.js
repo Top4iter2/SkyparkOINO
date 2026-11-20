@@ -6,100 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const noBtn = document.getElementById('noBtn');
     const successModal = document.getElementById('successModal');
     const closeModal = document.getElementById('closeModal');
-    const statusBadge = document.getElementById('statusBadge');
-
-    // Элементы для 3D-параллакса
-    const ticketCard = document.getElementById('ticketCard');
-    const holoGlare = document.getElementById('holoGlare');
 
     let isDrawing = false;
     let isRevealed = false;
 
-    // ==========================================
-    // 1. 3D-ПАРАЛЛАКС ОТ ГИРОСКОПА ТЕЛЕФОНА
-    // ==========================================
-    let baseBeta = null;
-    let baseGamma = null;
-    let gyroEnabled = false;
-
-    function applyTilt(rotateX, rotateY, glareX, glareY) {
-        const clampedX = Math.max(-16, Math.min(16, rotateX));
-        const clampedY = Math.max(-16, Math.min(16, rotateY));
-
-        ticketCard.style.transform = `rotateX(${clampedX}deg) rotateY(${clampedY}deg)`;
-
-        const shadowX = -clampedY * 1.4;
-        const shadowY = 22 + clampedX * 1.4;
-        ticketCard.style.boxShadow = `${shadowX}px ${shadowY}px 45px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.14)`;
-
-        holoGlare.style.background = `radial-gradient(
-            circle at ${glareX}% ${glareY}%,
-            rgba(255, 255, 255, 0.32) 0%,
-            rgba(5, 217, 232, 0.18) 25%,
-            rgba(255, 42, 109, 0.12) 48%,
-            transparent 72%
-        )`;
-        holoGlare.style.opacity = '0.95';
-    }
-
-    function handleOrientation(event) {
-        if (event.beta === null || event.gamma === null) return;
-
-        if (baseBeta === null) baseBeta = event.beta;
-        if (baseGamma === null) baseGamma = event.gamma;
-
-        const deltaBeta = event.beta - baseBeta;
-        const deltaGamma = event.gamma - baseGamma;
-
-        const rotateX = -deltaBeta * 0.45;
-        const rotateY = deltaGamma * 0.45;
-
-        const glareX = Math.max(0, Math.min(100, 50 + deltaGamma * 1.6));
-        const glareY = Math.max(0, Math.min(100, 50 + deltaBeta * 1.6));
-
-        requestAnimationFrame(() => {
-            applyTilt(rotateX, rotateY, glareX, glareY);
-        });
-    }
-
-    function enableGyroscope() {
-        if (gyroEnabled) return;
-
-        if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
-            DeviceOrientationEvent.requestPermission()
-                .then(permissionState => {
-                    if (permissionState === 'granted') {
-                        window.addEventListener('deviceorientation', handleOrientation);
-                        gyroEnabled = true;
-                    }
-                })
-                .catch(console.error);
-        } else if ('DeviceOrientationEvent' in window) {
-            window.addEventListener('deviceorientation', handleOrientation);
-            gyroEnabled = true;
-        }
-    }
-
-    enableGyroscope();
-    document.body.addEventListener('touchstart', enableGyroscope, { once: true });
-
-    document.addEventListener('mousemove', (e) => {
-        if (gyroEnabled && baseBeta !== null) return;
-        const rect = ticketCard.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-
-        const rotateY = ((e.clientX - centerX) / (rect.width / 2)) * 12;
-        const rotateX = -((e.clientY - centerY) / (rect.height / 2)) * 12;
-        const glareX = ((e.clientX - rect.left) / rect.width) * 100;
-        const glareY = ((e.clientY - rect.top) / rect.height) * 100;
-
-        applyTilt(rotateX, rotateY, glareX, glareY);
-    });
-
-    // ==========================================
-    // 2. СКРЕТЧ-СЛОЙ БИЛЕТА И СМЕНА АТМОСФЕРЫ
-    // ==========================================
+    // Настройка размеров холста под Retina-экраны телефонов
     function initCanvas() {
         const rect = canvas.parentElement.getBoundingClientRect();
         const dpr = window.devicePixelRatio || 1;
@@ -108,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         canvas.height = rect.height * dpr;
         ctx.scale(dpr, dpr);
 
+        // Заливка серебристым градиентом (защитный слой)
         const gradient = ctx.createLinearGradient(0, 0, rect.width, rect.height);
         gradient.addColorStop(0, '#3a3f58');
         gradient.addColorStop(0.5, '#525875');
@@ -116,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, rect.width, rect.height);
 
+        // Текст-подсказка поверх защитного слоя
         ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
         ctx.font = '600 14px Montserrat, sans-serif';
         ctx.textAlign = 'center';
@@ -125,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initCanvas();
 
+    // Получение координат касания/курсора
     function getPosition(e) {
         const rect = canvas.getBoundingClientRect();
         const clientX = e.touches ? e.touches[0].clientX : e.clientX;
@@ -135,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
+    // Функция стирания
     function scratch(x, y) {
         ctx.globalCompositeOperation = 'destination-out';
         ctx.beginPath();
@@ -143,6 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
         checkScratchPercentage();
     }
 
+    // Проверка, сколько процентов уже стерто
     function checkScratchPercentage() {
         if (isRevealed) return;
 
@@ -150,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const pixels = imageData.data;
         let transparentPixels = 0;
 
+        // Проверяем каждый 16-й пиксель для высокой скорости работы на телефоне
         for (let i = 3; i < pixels.length; i += 64) {
             if (pixels[i] === 0) {
                 transparentPixels++;
@@ -159,25 +76,23 @@ document.addEventListener('DOMContentLoaded', () => {
         const totalSampled = pixels.length / 64;
         const percentage = (transparentPixels / totalSampled) * 100;
 
+        // Если стерто больше 40%, плавно убираем остаток слоя и показываем кнопки
         if (percentage > 40) {
             isRevealed = true;
             canvas.style.opacity = '0';
             setTimeout(() => {
                 canvas.style.display = 'none';
             }, 500);
-
-            // Переключаем неоновую подсветку фона и статус билета
-            document.body.classList.add('unlocked');
-            statusBadge.textContent = 'ACCESS GRANTED • VIP';
-
             actionBlock.classList.remove('hidden');
 
+            // Легкая вибрация на поддерживаемых смартфонах
             if (navigator.vibrate) {
                 navigator.vibrate(50);
             }
         }
     }
 
+    // События для сенсорных экранов (телефоны)
     canvas.addEventListener('touchstart', (e) => {
         isDrawing = true;
         const pos = getPosition(e);
@@ -194,6 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
         isDrawing = false;
     });
 
+    // События для мыши (на случай теста с ПК)
     canvas.addEventListener('mousedown', (e) => {
         isDrawing = true;
         const pos = getPosition(e);
@@ -210,9 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
         isDrawing = false;
     });
 
-    // ==========================================
-    // 3. КНОПКИ ОТВЕТА И МОДАЛЬНОЕ ОКНО
-    // ==========================================
+    // Интерактив с кнопкой "Нет" (убегает при попытке нажать)
     const noTexts = [
         'Точно нет? 🤔',
         'Подумай еще раз!',
@@ -239,6 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
     noBtn.addEventListener('touchstart', dodgeButton);
     noBtn.addEventListener('click', dodgeButton);
 
+    // Согласие
     yesBtn.addEventListener('click', () => {
         successModal.classList.remove('hidden');
         if (navigator.vibrate) {
