@@ -18,9 +18,12 @@
             <p class="subtitle">Сотри защитный слой на билете ниже, чтобы узнать подробности</p>
         </header>
 
-        <!-- Интерактивный билет -->
-        <div class="ticket-wrapper">
-            <div class="ticket">
+        <!-- Интерактивный билет с 3D-сценой -->
+        <div class="ticket-wrapper" id="ticketWrapper">
+            <div class="ticket" id="ticketCard">
+                <!-- Голографический блик от наклона -->
+                <div class="holo-glare" id="holoGlare"></div>
+
                 <!-- Верхняя часть билета -->
                 <div class="ticket-top">
                     <div class="ticket-header">
@@ -89,3 +92,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+
