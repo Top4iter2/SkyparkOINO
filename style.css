@@ -29,9 +29,9 @@ body {
 /* Неоновое свечение на фоне */
 .background-glow {
     position: fixed;
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, rgba(255,42,109,0.25) 0%, rgba(5,217,232,0.1) 50%, transparent 70%);
+    width: 320px;
+    height: 320px;
+    background: radial-gradient(circle, rgba(255,42,109,0.28) 0%, rgba(5,217,232,0.12) 50%, transparent 70%);
     top: 10%;
     left: 50%;
     transform: translateX(-50%);
@@ -76,19 +76,40 @@ body {
     line-height: 1.4;
 }
 
-/* Стили билета */
+/* 3D-сцена для билета */
 .ticket-wrapper {
     width: 100%;
-    perspective: 1000px;
+    perspective: 900px;
     margin-bottom: 28px;
 }
 
 .ticket {
     background: var(--card-bg);
     border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.08);
+    box-shadow: 0 22px 45px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.1);
     overflow: hidden;
     position: relative;
+    transform-style: preserve-3d;
+    will-change: transform;
+    transition: transform 0.12s ease-out, box-shadow 0.12s ease-out;
+}
+
+/* Голографический блик поверх билета */
+.holo-glare {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 5;
+    background: radial-gradient(
+        circle at 50% 50%,
+        rgba(255, 255, 255, 0.22) 0%,
+        rgba(5, 217, 232, 0.12) 25%,
+        rgba(255, 42, 109, 0.08) 45%,
+        transparent 70%
+    );
+    mix-blend-mode: overlay;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
 }
 
 .ticket-top {
@@ -162,9 +183,10 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    touch-action: none; /* Важно для плавного стирания пальцем без скролла страницы */
+    touch-action: none;
     cursor: pointer;
     transition: opacity 0.5s ease;
+    z-index: 2;
 }
 
 /* Линия отрыва билета */
@@ -327,3 +349,5 @@ body {
 .modal-card strong {
     color: #fff;
 }
+
+
